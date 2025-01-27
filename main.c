@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "./include/bubble_sort.h"
+#include "./include/insertion_sort.h"
 
 bool pred_greater_int(int op1, int op2) {
 	return op1 > op2;
@@ -18,13 +19,13 @@ int main() {
 	print_arr_int(arr, length);
 	printf("\n");
 
-	bubble_sort_int(arr, length, pred_greater_int);
+	insertion_sort_int(arr, length, pred_greater_int);
 
 	printf("* After greater: ");
 	print_arr_int(arr, length);
 	printf("\n");
 
-	bubble_sort_int(arr, length, pred_less_int);
+	insertion_sort_int(arr, length, pred_less_int);
 
 	printf("* After less: ");
 	print_arr_int(arr, length);
