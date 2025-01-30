@@ -1,26 +1,19 @@
 #include "../include/bubble_sort.h"
+#include "../include/swap.h"
 
-void bubble_sort_int(int* container, size_t length, bool (*pred)(int, int)) {
-	size_t outer = 0;
-
-	while (outer < length - 1) {
-		size_t inner = outer + 1;
-
+void bubble_sort_int(int* cont, size_t length, Pred_int pred) {
+	for (size_t pass = 0; pass < length - 1; ++pass) {
 		bool has_swapped = false;
 
-		while (inner <  length) {
-			if (pred(container[outer], container[inner])) {
-				swap_int(&container[outer], &container[inner]);
+		for (size_t cur = 0; cur < length - pass - 1; ++cur) {
+			if (pred(cont[cur], cont[cur + 1])) {
+				swap_int(&cont[cur], &cont[cur + 1]);
 				has_swapped = true;
 			}
-
-			++inner;
 		}
 
 		if (!has_swapped) {
 			break;
 		}
-
-		++outer;
 	}
 }

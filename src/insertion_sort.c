@@ -2,8 +2,10 @@
 #include <stdbool.h>
 
 #include "../include/insertion_sort.h"
+#include "../include/predicates.h"
+#include "../include/swap.h"
 
-void insertion_sort_int(int* cont, size_t length, bool (*pred)(int, int)) {
+void insertion_sort_int(int* cont, size_t length, Pred_int pred) {
 	for (size_t sorted = 0; sorted < length - 1; ++sorted) {
 		size_t to_insert = sorted + 1;
 
