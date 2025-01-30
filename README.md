@@ -4,7 +4,7 @@
 
 * [x] [bubble_sort.c](./src/bubble_sort.c)
 
-![](./manim/media/videos/bubble_sort_scene/1080p60/BubbleSortScene.mp4)
+https://github.com/user-attachments/assets/a2b34bc6-ec64-4974-8e2e-e6a328396a2e
 
 * [x] [insertion_sort.c](./src/insertion_sort.c)
 * [x] [selection_sort.c](./src/selection_sort.c)
