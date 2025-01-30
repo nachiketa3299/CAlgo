@@ -1,14 +1,15 @@
 # Algo / DS study in pure C
 
-* SRS with Anki
-
 ### Sorting Algorithms
 
-* [x] [bubble_sort.h](./include/bubble_sort.h) (2025-01-23)
-* [x] [insertion_sort.h](./include/insertion_sort.h) (2025-01-26)
-* [ ] selection_sort.h (2025-01-27)
-* [ ] merge_sort.h
-* [ ] heap_sort.h
+* [x] [bubble_sort.c](./src/bubble_sort.c)
+
+![](./manim/media/videos/bubble_sort_scene/1080p60/BubbleSortScene.mp4)
+
+* [x] [insertion_sort.c](./src/insertion_sort.c)
+* [x] [selection_sort.c](./src/selection_sort.c)
+* [ ] merge_sort.c
+* [ ] heap_sort.c
 
 ### Data Structures
 
