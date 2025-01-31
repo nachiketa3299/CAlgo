@@ -9,6 +9,7 @@
 #include "./include/bubble_sort.h"
 #include "./include/insertion_sort.h"
 #include "./include/selection_sort.h"
+#include "./include/merge_sort.h"
 
 struct TestCase {
 	SortAlgo_int sort_algo;
@@ -24,6 +25,7 @@ struct TestCase tcs[] = {
 	(struct TestCase) { .sort_algo = bubble_sort_int, .case_name = "Bubble" },
 	(struct TestCase) { .sort_algo = insertion_sort_int, .case_name = "Insertion" },
 	(struct TestCase) { .sort_algo = selection_sort_int, .case_name = "Selection" },
+	(struct TestCase) { .sort_algo = merge_sort_int, .case_name = "Merge"}
 };
 
 struct Pred_int_wrapper preds[] = {
