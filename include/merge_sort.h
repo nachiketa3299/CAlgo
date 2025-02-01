@@ -5,6 +5,9 @@
 
 #include "./predicates.h"
 
+/*!
+ * @param pred predicate that satisfies strict weak ordering.
+ */
 void merge_sort_int(int* const, size_t length, Pred_int pred);
 
 #endif

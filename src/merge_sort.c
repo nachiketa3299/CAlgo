@@ -12,20 +12,24 @@ void merge_sort_int(int* cont, size_t length, Pred_int pred) {
   free(buff);
 }
 
-/// @param iend end of index (inclusive)
+/// @details
+/// Split & merge array with a splitting range of [begin, end)
 void _merge_sort_int(int* cont, int* buff, Pred_int pred, size_t begin, size_t end) {
+
   if (begin < end - 1) {
     size_t mid = begin + (end - begin) / 2;
 
     _merge_sort_int(cont, buff, pred, begin, mid);
-    _merge_sort_int(cont, buff, pred, mid + 1, end);
+    _merge_sort_int(cont, buff, pred, mid, end);
 
     _merge_int(cont, buff, pred, begin, mid, end);
   }
+
 }
 
-// First subarray is [begin..mid]
-// Second subarray is [mid+1..end]
+/// @details
+/// First array's range is [begin, mid)
+/// Second array's range is [mid, end)
 void _merge_int(
   int* cont, int* buff, 
   Pred_int pred, 
@@ -35,9 +39,11 @@ void _merge_int(
   size_t slength1 = mid - begin;
   size_t slength2 = end - mid;
 
+  // define the starting points of each subarray (both reside in the same array)
   int* sarr1 = cont + begin;
   int* sarr2 = cont + mid;
 
+  // define buffers corresponding to each subarray
   int* sbuff1 = buff;
   int* sbuff2 = buff + slength1;
 
@@ -48,17 +54,22 @@ void _merge_int(
   size_t sarr2_idx = 0;
   size_t cur = begin;
 
+  // merge!
+
   while (sarr1_idx < slength1 && sarr2_idx < slength2) {
-    if (!pred(sbuff1[sarr1_idx], sbuff2[sarr2_idx])) {
+    if (pred(sbuff1[sarr1_idx], sbuff2[sarr2_idx])) {
       cont[cur] = sbuff1[sarr1_idx];
       ++sarr1_idx;
-    }
-    else {
+
+    } else {
       cont[cur] = sbuff2[sarr2_idx];
       ++sarr2_idx;
     }
+
     ++cur;
   }
+
+  // is there something left?
 
   while (sarr1_idx < slength1) {
     cont[cur++] = sbuff1[sarr1_idx++];

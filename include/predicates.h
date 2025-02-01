@@ -5,7 +5,24 @@
 
 typedef bool (*Pred_int)(int, int);
 
-bool pred_greater_int(int op1, int op2);
-bool pred_less_int(int op1, int op2);
+/* Strict Weak Ordering */
+
+bool greater_int(int op1, int op2);
+
+bool less_int(int op1, int op2);
+
+/* Weak Ordering */
+
+bool greater_equal_int(int op1, int op2);
+
+bool less_equal_int(int op1, int op2);
+
+/* Equivalence */
+
+bool equal_to_int(int op1, int op2);
+
+bool not_equal_to_int(int op1, int op2);
+
+
 
 #endif

@@ -8,7 +8,10 @@
 
 typedef void (*SortAlgo_int)(int*, size_t, Pred_int);
 
-/// @brief Wrapper function for general sorting
+/*!
+ * @brief Wrapper function for general sorting
+ * @param pred predicate that satisfies strict weak ordering.
+ */
 void sort(SortAlgo_int sort_algo, int* cont, size_t length, Pred_int pred);
 
 #endif
