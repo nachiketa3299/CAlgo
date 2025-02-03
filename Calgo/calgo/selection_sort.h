@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-#include "./predicates.h"
+#include "predicates.h"
 
 /*!
  * @param pred predicate that satisfies strict weak ordering.

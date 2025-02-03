@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 
-#include "./predicates.h"
+#include "predicates.h"
 
 /*!
  * @param inverted_pred predicate that satisfies strict weak ordering.

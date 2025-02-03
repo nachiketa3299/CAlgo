@@ -1,0 +1,5 @@
+PROJECT(CalgoTest_Sort)
+
+ADD_EXECUTABLE(CalgoTest_Sort main.c)
+
+TARGET_LINK_LIBRARIES(CalgoTest_Sort PRIVATE Calgo)

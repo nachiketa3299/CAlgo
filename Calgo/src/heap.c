@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <stdlib.h>
 
-#include "../include/predicates.h"
-#include "../include/swap.h"
+#include "predicates.h"
+#include "swap.h"
 
 void bubble_down_int(int* cont, size_t length, Pred_int pred, size_t c_parent) {
   size_t l_c = 2 * c_parent + 1;

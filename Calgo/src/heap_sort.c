@@ -1,6 +1,6 @@
-#include "../include/heap_sort.h"
-#include "../include/heap.h"
-#include "../include/swap.h"
+#include "heap_sort.h"
+#include "heap.h"
+#include "swap.h"
 
 void heap_sort_int(int* cont, size_t length, Pred_int pred) {
   make_heap_int(cont, length, pred);

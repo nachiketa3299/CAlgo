@@ -1,0 +1,30 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.27)
+PROJECT(Calgo)
+
+SET(calgo_sources
+	src/bubble_sort.c
+	src/heap_sort.c
+	src/heap.c
+	src/insertion_sort.c
+	src/merge_sort.c
+	src/predicates.c
+	src/print.c
+	src/selection_sort.c
+	src/sort.c
+	src/swap.c
+)
+
+# This is static library
+ADD_LIBRARY(Calgo STATIC ${calgo_sources})
+
+# Include directories for Calgo project itself
+# for `#include "header.h"`
+TARGET_INCLUDE_DIRECTORIES(Calgo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/calgo/)
+
+# Public include directories for other target
+# for `#include "calgo/header.h"
+TARGET_INCLUDE_DIRECTORIES(Calgo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+SET_TARGET_PROPERTIES(Calgo PROPERTIES
+	ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
+)

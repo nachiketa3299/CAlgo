@@ -1,5 +1,5 @@
-#include "../include/bubble_sort.h"
-#include "../include/swap.h"
+#include "bubble_sort.h"
+#include "swap.h"
 
 void bubble_sort_int(int* cont, size_t length, Pred_int pred) {
   for (size_t pass = 0; pass < length - 1; ++pass) {

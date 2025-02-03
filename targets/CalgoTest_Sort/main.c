@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "./include/sort.h"
-#include "./include/predicates.h"
-#include "./include/print.h"
+#include "calgo/sort.h"
+#include "calgo/predicates.h"
+#include "calgo/print.h"
 
-#include "./include/bubble_sort.h"
-#include "./include/insertion_sort.h"
-#include "./include/selection_sort.h"
-#include "./include/merge_sort.h"
-#include "./include/heap_sort.h"
+#include "calgo/bubble_sort.h"
+#include "calgo/insertion_sort.h"
+#include "calgo/selection_sort.h"
+#include "calgo/merge_sort.h"
+#include "calgo/heap_sort.h"
 
-#include "./include/heap.h"
+#include "calgo/heap.h"
 
 struct TestCase {
   SortAlgo_int sort_algo;

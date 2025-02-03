@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../include/merge_sort.h"
+#include "merge_sort.h"
 
 void _merge_sort_int(int*, int*, Pred_int, size_t, size_t);
 void _merge_int(int*, int*, Pred_int, size_t, size_t, size_t);

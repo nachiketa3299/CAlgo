@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-#include "./predicates.h"
+#include "predicates.h"
 
 typedef void (*SortAlgo_int)(int*, size_t, Pred_int);
 

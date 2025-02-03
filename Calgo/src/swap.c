@@ -1,4 +1,4 @@
-#include "../include/swap.h"
+#include "swap.h"
 
 void swap_int(int* a, int* b) {
   int temp = *a;

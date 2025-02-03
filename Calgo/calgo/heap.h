@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 
-#include "./predicates.h"
+#include "predicates.h"
 
 /*! 
  * @brief Convert given range of array into a heap.
