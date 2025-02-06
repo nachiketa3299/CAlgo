@@ -15,7 +15,7 @@ https://github.com/user-attachments/assets/a2b34bc6-ec64-4974-8e2e-e6a328396a2e
 ### Search Algorithms
 
 * [ ] linear_search.c
-* [ ] binary_search.c
+* [x] [binary_search.c](./src/binary_search.)
 
 ### Shortest Path Algorithms
 
@@ -34,6 +34,3 @@ https://github.com/user-attachments/assets/a2b34bc6-ec64-4974-8e2e-e6a328396a2e
 * [ ] tree
 * [ ] graph
 * [x] heap
-	* `make_heap`
-	* `push_heap`
-	* `pop_heap`
