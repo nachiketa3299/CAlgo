@@ -12,6 +12,7 @@ SET(calgo_sources
 	src/selection_sort.c
 	src/sort.c
 	src/swap.c
+	src/binary_search.c
 )
 
 # This is static library

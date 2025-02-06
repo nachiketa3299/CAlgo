@@ -1,0 +1,9 @@
+PROJECT(calgo_test)
+
+ADD_EXECUTABLE(test_search test_search.c)
+ADD_EXECUTABLE(test_heap test_heap.c)
+ADD_EXECUTABLE(test_sort test_sort.c)
+
+TARGET_LINK_LIBRARIES(test_search PRIVATE Calgo)
+TARGET_LINK_LIBRARIES(test_heap PRIVATE Calgo)
+TARGET_LINK_LIBRARIES(test_sort PRIVATE Calgo)
