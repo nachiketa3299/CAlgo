@@ -8,6 +8,10 @@
 /*!
  * @param pred predicate that satisfies strict weak ordering.
  */
-void merge_sort_int(int* const, size_t length, Pred_int pred);
+void
+merge_sort_int(
+  int *first, int *last,
+  Pred_int pred
+);
 
 #endif

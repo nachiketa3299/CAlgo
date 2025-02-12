@@ -1,0 +1,30 @@
+project(calgo_test
+  DESCRIPTION "Google Test for Calgo"
+  LANGUAGES C CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include(FetchContent)
+
+# Google Test
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+enable_testing()
+
+FetchContent_MakeAvailable(googletest)
+
+include(GoogleTest)
+
+macro(add_calgo_test target file)
+  add_executable(${target} ${file})
+  target_link_libraries(${target} PRIVATE GTest::gtest_main PRIVATE Calgo)
+  gtest_discover_tests(${target})
+endmacro()
+
+add_calgo_test(sort_test sort_test.cc)

@@ -1,13 +1,13 @@
 #include "binary_search.h"
 
 bool 
-binary_search_int(
-  int const* first, int const* last, 
+bin_search_int(
+  int const *first, int const *last, 
   int target,
   Pred_int pred
 ) {
   while (first < last) {
-    int const* mid = first + (last - first) / 2;
+    int const *mid = first + (last - first) / 2;
 
     if (!pred(target, *mid) && !pred(*mid, target)) {
       return true;
@@ -23,14 +23,14 @@ binary_search_int(
   return false;
 }
 
-int const* 
-lower_bound_int(
-  int const* first, int const* last, 
+int const
+*bin_lbound_int(
+  int const *first, int const *last, 
   int target,
   Pred_int pred
 ) {
   while (first < last) {
-    int const* mid = first + (last - first) / 2;
+    int const *mid = first + (last - first) / 2;
     // range of left subarray: [first, mid + 1)
     // range of right subarray: [mid + 1, last)
 
@@ -46,14 +46,14 @@ lower_bound_int(
   return first;
 }
 
-int const* 
-upper_bound_int(
-  int const* first, int const* last, 
+int const
+*bin_ubound_int(
+  int const *first, int const *last, 
   int target,
   Pred_int pred
 ) {
   while (first < last) {
-    int const* mid = first + (last - first) / 2;
+    int const *mid = first + (last - first) / 2;
     if (pred(target, *mid)) {
       last = mid;
     } else {
@@ -65,13 +65,13 @@ upper_bound_int(
 }
 
 void 
-equal_range_int(
-  int const* first, int const* last, 
-  int const** out_lower, int const** out_upper, 
+bin_erange_int(
+  int const *first, int const *last, 
+  int const **out_lower, int const **out_upper, 
   int target,
   Pred_int pred
 ) {
 
-  *out_lower = lower_bound_int(first, last, target, pred);
-  *out_upper = upper_bound_int(first, last, target, pred);
+  *out_lower = bin_lbound_int(first, last, target, pred);
+  *out_upper = bin_ubound_int(first, last, target, pred);
 }

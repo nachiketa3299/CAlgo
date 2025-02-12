@@ -1,12 +1,18 @@
 #include "heap_sort.h"
+
 #include "heap.h"
 #include "swap.h"
 
-void heap_sort_int(int* cont, size_t length, Pred_int pred) {
-  make_heap_int(cont, length, pred);
+void 
+heap_sort_int(
+  int *first, int *last, 
+  Pred_int inverted_pred
+) {
+  make_heap_int(first, last, inverted_pred);
+  size_t const len = last - first;
 
-  for (size_t i = length - 1; i > 0; --i) {
-    swap_int(&cont[0], &cont[i]);
-    bubble_down_int(cont, i, pred, 0);
+  for (int *cur = last - 1; cur > first; --cur) {
+    swap_int(first, cur);
+    bubble_down_int(first, cur, inverted_pred, 0);
   }
 }

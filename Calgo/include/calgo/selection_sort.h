@@ -9,6 +9,10 @@
 /*!
  * @param pred predicate that satisfies strict weak ordering.
  */
-void selection_sort_int(int* cont, size_t length, Pred_int pred);
+void 
+selection_sort_int(
+  int *first, int *last,
+  Pred_int pred
+);
 
 #endif

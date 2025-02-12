@@ -15,6 +15,10 @@
  * For descending order: pass a "greater than" comparison. (a > b)
  * For ascending order: pass a "less than" comparison. (a < b)
  */
-void heap_sort_int(int* cont, size_t length, Pred_int inverted_pred);
+void 
+heap_sort_int(
+  int *first, int *last, 
+  Pred_int inverted_pred
+);
 
 #endif

@@ -1,15 +1,41 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.27)
+cmake_minimum_required(VERSION 3.27)
 
-PROJECT(CalgoDev)
+project(Calgo
+	LANGUAGES C
+	DESCRIPTION "Algorithms in pure C"
+)
 
-SET(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD 17)
 
-ADD_SUBDIRECTORY(Calgo)
+set(calgo_public_include_dir ${CMAKE_CURRENT_SOURCE_DIR}/Calgo/include/)
+set(calgo_private_include_dir ${CMAKE_CURRENT_SOURCE_DIR}/Calgo/include/calgo/)
 
-FILE(GLOB target_dirs "targets/*")
+set(calgo_src_prefix_dir ${CMAKE_CURRENT_SOURCE_DIR}/Calgo/src/)
+set(calgo_sources
+	predicates.c print.c swap.c
+	sort.c
+	bubble_sort.c insertion_sort.c merge_sort.c heap_sort.c selection_sort.c
+	search.c
+	binary_search.c linear_search.c
+	heap.c
+)
 
-FOREACH(target_dir ${target_dirs})
-	IF(EXISTS ${target_dir}/cmakelists.txt)
-		ADD_SUBDIRECTORY(${target_dir})
-	ENDIF()
-ENDFOREACH()
+list(TRANSFORM calgo_sources PREPEND ${calgo_src_prefix_dir})
+
+message("[Calgo] Source files found: ")
+
+foreach(source IN LISTS calgo_sources)
+	message("\t${source}")
+endforeach()
+
+add_library(Calgo STATIC "${calgo_sources}")
+
+# Include directories for Calgo project itself (`#include "header.h"`)
+# Public include directories for other target (`#include "calgo/header.h"`)
+target_include_directories(Calgo
+	PUBLIC ${calgo_public_include_dir}
+	PRIVATE ${calgo_private_include_dir}
+)
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/targets/CalgoTests)
+add_subdirectory(${CMAKE_SOURCE_DIR}/targets/CalgoBenchmarks)

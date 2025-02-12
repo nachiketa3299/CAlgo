@@ -1,43 +1,48 @@
-#include "predicates.h"
+#ifndef _CALGO_PREDICATES_H
+#define _CALGO_PREDICATES_H
+
+#include <stdbool.h>
+
+typedef 
+bool 
+(*Pred_int)(
+  int left, int right
+);
+
+/* Strict Weak Ordering */
 
 bool 
 greater_int(
   int left, int right
-) {
-  return left > right;
-}
+);
 
 bool 
 less_int(
   int left, int right
-) {
-  return left < right;
-}
+);
+
+/* Weak Ordering */
 
 bool 
 greater_equal_int(
   int left, int right
-) {
-  return left >= right;
-}
+);
 
 bool 
 less_equal_int(
   int left, int right
-) {
-  return left <= right;
-}
+);
+
+/* Equivalence */
 
 bool 
 equal_to_int(
   int left, int right
-) {
-  return left == right;
-}
+);
 
 bool 
 not_equal_to_int(
   int left, int right
-) {
-  return left != right;
-}
+);
+
+#endif

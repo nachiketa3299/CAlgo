@@ -1,5 +1,7 @@
 # CS studies in pure C!
 
+This project consists of 1 static library `Calgo` with its own tests and benchmarks.
+
 ### Sorting Algorithms
 
 * [x] [bubble_sort.c](./Calgo/src/bubble_sort.c)
@@ -14,15 +16,15 @@ https://github.com/user-attachments/assets/a2b34bc6-ec64-4974-8e2e-e6a328396a2e
 
 ### Search Algorithms
 
-* [ ] linear_search.c
-* [x] [binary_search.c](./Calgo/src/binary_search.)
+* [x] [linear_search.c](./Calgo/src/linear_search.c)
+* [x] [binary_search.c](./Calgo/src/binary_search.c)
 
 ### Shortest Path Algorithms
 
 * [ ] bfs.c
 * [ ] dfs.c
 * [ ] dijkstra.c
-* [ ] kruscal.c
+* [ ] kruskal.c
 * [ ] a_star.c
 * [ ] prim.c
 * [ ] bellman_ford.c

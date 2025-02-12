@@ -1,81 +1,94 @@
+#include "merge_sort.h"
+
 #include <stdlib.h>
 #include <string.h>
 
-#include "merge_sort.h"
+void
+_merge_sort_int(
+  int *first, int *last,
+  Pred_int pred,
+  int *buff
+);
 
-void _merge_sort_int(int*, int*, Pred_int, size_t, size_t);
-void _merge_int(int*, int*, Pred_int, size_t, size_t, size_t);
+void
+_merge_int(
+  int *first1, int *last1,
+  int *first2, int *last2,
+  Pred_int pred,
+  int *buff
+);
 
-void merge_sort_int(int* cont, size_t length, Pred_int pred) {
-  int* buff = (int*)malloc(sizeof(int) * length);
-  _merge_sort_int(cont, buff, pred, 0, length);
+void
+merge_sort_int(
+  int *first, int *last,
+  Pred_int pred
+) {
+  size_t const len = last - first;
+  int *buff = (int *)malloc(len * sizeof(int));
+
+  //
+
   free(buff);
 }
 
-/// @details
-/// Split & merge array with a splitting range of [begin, end)
-void _merge_sort_int(int* cont, int* buff, Pred_int pred, size_t begin, size_t end) {
+void
+_merge_sort_int(
+  int *first, int *last,
+  Pred_int pred,
+  int *buff
+) {
+  if (first < last - 1) {
+    size_t const len = last - first;
+    int *mid = first + len / 2;
 
-  if (begin < end - 1) {
-    size_t mid = begin + (end - begin) / 2;
+    _merge_sort_int(first, mid, pred, buff);
+    _merge_sort_int(mid, last, pred, buff);
 
-    _merge_sort_int(cont, buff, pred, begin, mid);
-    _merge_sort_int(cont, buff, pred, mid, end);
-
-    _merge_int(cont, buff, pred, begin, mid, end);
+    _merge_int(first, mid, mid, last, pred, buff);
   }
-
 }
 
-/// @details
-/// First array's range is [begin, mid)
-/// Second array's range is [mid, end)
-void _merge_int(
-  int* cont, int* buff, 
-  Pred_int pred, 
-  size_t begin, size_t mid, size_t end
-  ) {
+void 
+_merge_int(
+  int *first1, int *last1,
+  int *first2, int *last2,
+  Pred_int pred,
+  int *buff
+) {
+  size_t const len1 = last1 - first1;
+  size_t const len2 = last2 - first2;
 
-  size_t slength1 = mid - begin;
-  size_t slength2 = end - mid;
+  int *bfirst1 = buff, *blast1 = bfirst1 + len1;
+  int *bfirst2 = blast1, *blast2 = bfirst2 + len2;
 
-  // define the starting points of each subarray (both reside in the same array)
-  int* sarr1 = cont + begin;
-  int* sarr2 = cont + mid;
+  memcpy(bfirst1, first1, len1 * sizeof(int));
+  memcpy(bfirst2, first2, len2 * sizeof(int));
 
-  // define buffers corresponding to each subarray
-  int* sbuff1 = buff;
-  int* sbuff2 = buff + slength1;
+  int *first = first1;
 
-  memcpy(sbuff1, sarr1, slength1 * sizeof(int));
-  memcpy(sbuff2, sarr2, slength2 * sizeof(int));
-
-  size_t sarr1_idx = 0;
-  size_t sarr2_idx = 0;
-  size_t cur = begin;
-
-  // merge!
-
-  while (sarr1_idx < slength1 && sarr2_idx < slength2) {
-    if (pred(sbuff1[sarr1_idx], sbuff2[sarr2_idx])) {
-      cont[cur] = sbuff1[sarr1_idx];
-      ++sarr1_idx;
-
+  while (bfirst1 < blast1 && bfirst2 < blast2) {
+    if (pred(*bfirst1, *bfirst2)) {
+      *first = *bfirst1;
+      ++bfirst1;
     } else {
-      cont[cur] = sbuff2[sarr2_idx];
-      ++sarr2_idx;
+      *first = *bfirst2;
+      ++bfirst2;
     }
 
-    ++cur;
+    ++first;
   }
 
-  // is there something left?
+  size_t const remain_len1 = blast1 - bfirst1;
 
-  while (sarr1_idx < slength1) {
-    cont[cur++] = sbuff1[sarr1_idx++];
+  if (remain_len1 > 0) {
+    memcpy(first, bfirst1, remain_len1 * sizeof(int));
+    first += remain_len1;
   }
 
-  while (sarr2_idx < slength2) {
-    cont[cur++] = sbuff2[sarr2_idx++];
+  size_t const remain_len2 = blast2 - bfirst2;
+
+  if (remain_len2 > 0) {
+    memcpy(first, bfirst2, remain_len2 * sizeof(int));
+    first += remain_len2;
   }
 }

@@ -9,7 +9,7 @@
  */
 void 
 print_arr_int(
-  int const* cont, size_t length
+  int const* first, int const* last
 );
 
 /*!
@@ -17,7 +17,7 @@ print_arr_int(
  */
 void 
 print_arr_with_idx_int(
-  int const* cont, size_t length
+  int const* first, int const* last
 );
 
 /*!
@@ -36,8 +36,9 @@ print_arr_with_idx_int(
  * 
  * Otherwise, the behavior is undefined.
  */
-void print_arr_mark_range_int(
-  int const* cont, size_t length, 
+void 
+print_arr_mark_range_int(
+  int const* first, int const* last,
   size_t range_count, ...
 );
 
