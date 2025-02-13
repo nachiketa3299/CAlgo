@@ -14,7 +14,7 @@ set(calgo_src_prefix_dir ${CMAKE_CURRENT_SOURCE_DIR}/Calgo/src/)
 set(calgo_sources
 	predicates.c print.c swap.c
 	sort.c
-	bubble_sort.c insertion_sort.c merge_sort.c heap_sort.c selection_sort.c
+	bubble_sort.c insertion_sort.c merge_sort.c heap_sort.c selection_sort.c quick_sort.c
 	search.c
 	binary_search.c linear_search.c
 	heap.c

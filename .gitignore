@@ -1,6 +1,6 @@
 *.exe
 .vscode/
 
-manim/__pycache__/
-manim/media/
+vis/__pycache__/
+vis/media/
 build/

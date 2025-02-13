@@ -6,11 +6,15 @@
 #include <benchmark/benchmark.h>
 
 extern "C" {
+
 #include "calgo/predicates.h"
+
 #include "calgo/bubble_sort.h"
 #include "calgo/insertion_sort.h"
 #include "calgo/selection_sort.h"
 #include "calgo/merge_sort.h"
+#include "calgo/quick_sort.h"
+
 }
 
 class SortingBMFixture: public benchmark::Fixture {
@@ -73,13 +77,33 @@ BENCHMARK_DEFINE_F(SortingBMFixture, MergeSort)(benchmark::State& state) {
   }
 }
 
+BENCHMARK_DEFINE_F(SortingBMFixture, QuickSort)(benchmark::State& state) {
+  for (auto _: state) {
+    vec = original;
+    quick_sort_int(vec.data(), vec.data() + vec.size(), greater_int);
+    benchmark::DoNotOptimize(vec);
+  }
+}
+
+BENCHMARK_DEFINE_F(SortingBMFixture, STLSort)(benchmark::State& state) {
+  for (auto _: state) {
+    vec = original;
+    std::sort(vec.begin(), vec.end(), greater_int);
+    benchmark::DoNotOptimize(vec);
+  }
+}
+
 BENCHMARK_REGISTER_F(SortingBMFixture, BubbleSort)
-  ->RangeMultiplier(2)->Range(1 << 10, 1 << 14);
+  ->RangeMultiplier(10)->Range(1 << 1, 1 << 20);
 BENCHMARK_REGISTER_F(SortingBMFixture, InsertionSort)
-  ->RangeMultiplier(2)->Range(1 << 10, 1 << 14);
+  ->RangeMultiplier(10)->Range(1 << 1, 1 << 20);
 BENCHMARK_REGISTER_F(SortingBMFixture, SelectionSort)
-  ->RangeMultiplier(2)->Range(1 << 10, 1 << 14);
+  ->RangeMultiplier(10)->Range(1 << 1, 1 << 20);
 BENCHMARK_REGISTER_F(SortingBMFixture, MergeSort)
-  ->RangeMultiplier(2)->Range(1 << 10, 1 << 14);
+  ->RangeMultiplier(10)->Range(1 << 1, 1 << 20);
+BENCHMARK_REGISTER_F(SortingBMFixture, QuickSort)
+  ->RangeMultiplier(10)->Range(1 << 1, 1 << 20);
+BENCHMARK_REGISTER_F(SortingBMFixture, STLSort)
+  ->RangeMultiplier(10)->Range(1 << 1, 1 << 20);
 
 BENCHMARK_MAIN();

@@ -26,7 +26,7 @@ merge_sort_int(
   size_t const len = last - first;
   int *buff = (int *)malloc(len * sizeof(int));
 
-  //
+  _merge_sort_int(first, last, pred, buff);
 
   free(buff);
 }

@@ -14,82 +14,47 @@ extern "C" {
 #include <calgo/insertion_sort.h>
 #include <calgo/selection_sort.h>
 #include <calgo/merge_sort.h>
+#include <calgo/quick_sort.h>
 
 }
 
-struct StaticSortingParams {
-  SortFunc_int sort;
-  Pred_int pred;
-  std::vector<int> arr;
+std::vector<std::vector<int>> sortingArrs = {
+  { -10, 222, 54, 2555, 11 },
+  { -18, -222, 52, 2555, 11 },
 };
 
-StaticSortingParams staticTCs[] = {
-  { bubble_sort_int, greater_int, { -10, 222, 54, 2555, 11 } },
-  { bubble_sort_int, greater_int, { -10, 222, 54, 2555, 11 } },
-  { bubble_sort_int, less_int, { -10, 222, 54, 2555, 11 } },
-  { bubble_sort_int, less_int, { -10, 222, 54, 2555, 11 } },
+struct FixtureParam {
+  FixtureParam(SortFunc_int const& func, Pred_int const& pred, std::vector<std::vector<int>> const& arrs): func(func), pred(pred), arrs(arrs) {}
+  SortFunc_int const func;
+  Pred_int const pred;
+  std::vector<std::vector<int>> arrs;
 };
 
-class StaticSortingTestFixture: public ::testing::TestWithParam<StaticSortingParams> {};
+class Fixture: public ::testing::TestWithParam<FixtureParam> {};
 
-TEST_P(StaticSortingTestFixture, SortsCorrectly) {
-  StaticSortingParams params = GetParam();
+TEST_P(Fixture, SortsCorrectly) {
+  auto p = GetParam();
+  
+  for (auto& arr: p.arrs) {
+    std::vector<int> cp(arr);
+    int *first = cp.data(), *last = first + cp.size();
 
-  std::vector<int> sorted(params.arr.size());
-  std::copy(params.arr.cbegin(), params.arr.cend(), sorted.begin());
-
-  int *first = sorted.data();
-  int *last = first + sorted.size();
-
-  bubble_sort_int(first, last, params.pred);
-  ASSERT_TRUE(std::is_sorted(first, last, params.pred));
+    p.func(first, last, p.pred);
+    ASSERT_TRUE(std::is_sorted(first, last, p.pred));
+  }
 }
 
-INSTANTIATE_TEST_SUITE_P(
-  SortingTests,
-  StaticSortingTestFixture,
-  ::testing::ValuesIn(staticTCs)
-);
+INSTANTIATE_TEST_SUITE_P(BubbleSort_Greater, Fixture, ::testing::Values(FixtureParam(bubble_sort_int, greater_int, sortingArrs)));
+INSTANTIATE_TEST_SUITE_P(BubbleSort_Less, Fixture, ::testing::Values(FixtureParam(bubble_sort_int, less_int, sortingArrs)));
 
-struct RandomSortingParams {
-  SortFunc_int sort;
-  Pred_int pred;
+INSTANTIATE_TEST_SUITE_P(InsertionSort_Greater, Fixture, ::testing::Values(FixtureParam(insertion_sort_int, greater_int, sortingArrs)));
+INSTANTIATE_TEST_SUITE_P(InsertionSort_Less, Fixture, ::testing::Values(FixtureParam(insertion_sort_int, less_int, sortingArrs)));
 
-  size_t arr_size;
+INSTANTIATE_TEST_SUITE_P(SelectionSort_Greater, Fixture, ::testing::Values(FixtureParam(selection_sort_int, greater_int, sortingArrs)));
+INSTANTIATE_TEST_SUITE_P(SelectionSort_Less, Fixture, ::testing::Values(FixtureParam(selection_sort_int, less_int, sortingArrs)));
 
-  int value_min;
-  int value_max;
-};
+INSTANTIATE_TEST_SUITE_P(MergeSort_Greater, Fixture, ::testing::Values(FixtureParam(merge_sort_int, greater_int, sortingArrs)));
+INSTANTIATE_TEST_SUITE_P(MergeSort_Less, Fixture, ::testing::Values(FixtureParam(merge_sort_int, less_int, sortingArrs)));
 
-RandomSortingParams randomTCs[] = {
-  { bubble_sort_int, greater_int, 100, std::numeric_limits<int>::min(), std::numeric_limits<int>::max() }, 
-  { bubble_sort_int, less_int, 100, std::numeric_limits<int>::min(), std::numeric_limits<int>::max() }, 
-};
-
-class RandomSortingFixture: public ::testing::TestWithParam<RandomSortingParams>{ };
-
-TEST_P(RandomSortingFixture, SortsCorrectly) {
-
-  auto const& params = GetParam();
-
-  std::random_device rd;
-  std::mt19937 gen(rd());
-
-  std::uniform_int_distribution<> val_dis(params.value_min, params.value_max);
-  std::vector<int> origin(params.arr_size);
-  for (auto& e: origin) { e = val_dis(gen); }
-
-  int *first = origin.data();
-  int *last = first + params.arr_size;
-
-  sort(params.sort, first, last, params.pred);
-
-  ASSERT_TRUE(std::is_sorted(first, last, params.pred));
-}
-
-INSTANTIATE_TEST_SUITE_P(
-  RandomSortingTests,
-  RandomSortingFixture,
-  ::testing::ValuesIn(randomTCs)
-);
-
+INSTANTIATE_TEST_SUITE_P(QuickSort_Greater, Fixture, ::testing::Values(FixtureParam(quick_sort_int, greater_int, sortingArrs)));
+INSTANTIATE_TEST_SUITE_P(QuickSort_Less, Fixture, ::testing::Values(FixtureParam(quick_sort_int, less_int, sortingArrs)));
